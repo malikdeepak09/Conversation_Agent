@@ -1,16 +1,12 @@
-from agent import QueryAgent
+from core.conversation import Conversation
 
 def main():
-    agent = QueryAgent()
+    print("\n🤖 Conversation Agent (CLI)")
+    print("Type /help for commands, /exit to quit")
+    print("-" * 40)
 
-    while True:
-        query = input("Enter your query: ")
-        if query.lower() in {"exit", "quit"}:
-            print("Exiting...")
-            break
-
-        response = agent.handle_query(query)
-        print(f"Agent: {response}")
+    convo = Conversation()
+    convo.start()
 
 if __name__ == "__main__":
     main()
