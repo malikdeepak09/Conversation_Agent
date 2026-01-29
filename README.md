@@ -1,72 +1,136 @@
-# conversation-agent with Contextual Memory
+# 🧠 Conversation Agent (CLI) with Contextual Memory
 
-This project features an AI-powered **Query-Response Agent** that remembers previous user interactions and generates context-aware responses. Built using the **Gemini LLM** for natural language processing and **FAISS** for semantic search, the agent can recall related queries and provide accurate, meaningful answers over time. The agent stores conversation history in a JSON file, allowing it to maintain context and improve responses as more queries are added.
+A **production-grade, CLI-based conversational AI agent** that remembers important facts across conversations and responds intelligently using contextual memory.
 
-## Key Features
-- **Contextual Memory**: The agent remembers past queries and responses to create more relevant and context-aware answers.
-- **FAISS Integration**: Implements FAISS to store and retrieve related queries for better search results and context.
-- **Dynamic Query Handling**: As new queries come in, the agent combines them with previous interactions to enhance its responses.
-- **Gemini LLM for Response Generation**: The agent uses the Gemini LLM model to generate accurate and human-like responses based on past conversations.
-- **Persistent History**: Conversation history is saved and loaded from a JSON file, making the agent capable of resuming conversations after a restart.
+This project is designed to be:
 
-## Technologies Used
-- **Python**
-- **Gemini LLM** (for natural language processing)
-- **FAISS** (for semantic search)
-- **PydanticAI** (for building the agent framework)
-- **JSON** (for conversation history storage)
+- Easy to clone & run
+- Robust in the face of API failures
+- Useful even across multiple sessions
 
-## Installation
+The agent uses **Gemini LLMs** for response generation, **FAISS** for semantic memory retrieval, and **SQLite** for persistent chat and memory storage.
 
-1. Clone the repository:
+---
 
-    ```bash
-    git clone https://github.com/deepakmalikk/conversation-agent.git
-    cd conversation-agent
-    ```
+## ✨ What Makes This Different?
 
-2. Create a virtual environment and activate it:
+Unlike simple chatbots, this agent:
 
-    - **For macOS/Linux**:
-      ```bash
-      python3 -m venv venv
-      source venv/bin/activate
-      ```
+- 🧠 **Remembers important facts** (e.g., user name)
+- 🗂 **Separates short-term and long-term memory**
+- 🚫 **Does NOT blindly load old chats**
+- 🎯 Uses memory **only when relevant**
+- 💻 Runs entirely in the **terminal (CLI)**
 
-    - **For Windows**:
-      ```bash
-      python -m venv venv
-      venv\Scripts\activate
-      ```
+---
 
-3. Install the required dependencies:
+## 🚀 Key Features
 
-    ```bash
-    pip install -r requirements.txt
-    ```
+### 🧠 Contextual Memory (Cross-Session)
 
-4. Create a `.env` file in the root directory and add your Gemini API key:
+- Important user facts are extracted and stored
+- Relevant memories are retrieved using semantic similarity
+- Memory persists across runs
 
-    ```plaintext
-    GEMINI_API_KEY=your-gemini-api-key
-    ```
+### 🔍 FAISS Semantic Search
 
-## Usage
+- Uses vector embeddings for memory retrieval
+- Ensures only **relevant past context** is injected
+- Prevents prompt pollution
 
-1. Run the agent script:
+### 💾 SQLite Persistence
 
-    ```bash
-    python main.py
-    ```
+- Stores:
+  - Full chat history
+  - Structured long-term memories
+- Zero external DB setup required
 
-2. To interact with the agent, you can call the `handle_query` method. For example:
+### 🤖 Gemini LLM Integration
 
-    ```python
-    agent = QueryAgent()
-    response = agent.handle_query("What is the capital of France?")
-    print(response)
-    ```
+- Uses **official `google-genai` SDK**
+- Graceful handling of:
+  - Quota exhaustion
+  - API errors
+- Clean fallback messages instead of crashes
 
+### 🖥 CLI-First UX
+
+- No UI required
+- Commands:
+  - `/help`
+  - `/exit`
+- Designed for developers & terminal users
+
+---
+
+## 🛠 Technologies Used
+
+- **Python 3.10+**
+- **Gemini LLM** (via `google-genai`)
+- **FAISS** (vector similarity search)
+- **SQLite** (persistent storage)
+- **dotenv** (environment management)
+
+---
+
+## 📦 Installation
+
+### 1️⃣ Clone the repository
+
+```bash
+git clone https://github.com/malikdeepak09/Conversation_Agent.git
+cd Conversation_Agent
+```
+
+### 2️⃣ Create & activate a virtual environment
+
+#### macOS / Linux
+
+```bash
+python3 -m venv myenv
+source myenv/bin/activate
+```
+
+#### Windows
+
+```bash
+python -m venv myenv
+myenv\Scripts\activate
+```
+
+### 3️⃣ Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4️⃣ Set up environment variables
+
+#### Create a .env file in the root directory:
+
+```bash
+GEMINI_API_KEY=your_gemini_api_key_here
+```
+
+---
+
+## ▶️ Usage
+
+#### Run the agent:
+
+```bash
+python main.py
+```
+
+#### You’ll see:
+
+```bash
+🤖 Conversation Agent (CLI)
+Type /help for commands, /exit to quit
+----------------------------------------
+
+You >
+```
 
 ## Contributing
 
